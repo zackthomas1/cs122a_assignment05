@@ -1,4 +1,6 @@
-show tables;
+Zachary Thomas 
+CS 122A
+Assignment 05 
 
 -- Questions on View (25 marks)
 Create VIEW Top_Machines_Used AS
@@ -34,11 +36,6 @@ Create VIEW Top_Machines_Used AS
     Select equipment_type, user_count, day_count, Rank() Over(Order by user_count Desc) usage_rank 
     From type_user_day_count;
 
-Drop view Top_Machines_Used;
-
-Select * 
-From Top_Machines_Used;
-
 -- Question on Trigger (5 marks)
 delimiter |
 create trigger PreventSalaryReduction
@@ -50,16 +47,6 @@ for each row
         end if; 
 	end;|
 delimiter ; 
-
-drop trigger PreventSalaryReduction;
-
-update employee
-set salary_hour = 6.00
-where card_id = 4;
-
-select *
-from employee
-where card_id=4;
 
 -- Question on Constraints (5 marks)
 DROP TABLE IF EXISTS `employee`;
@@ -73,12 +60,6 @@ CREATE TABLE `employee` (
   PRIMARY KEY (`card_id`) ,
  CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`card_id`) REFERENCES `person` (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO `employee` (`card_id`, `supervisor_card_id`,`schedule`, `employee_type`, `salary_hour`) VALUES (21,4, '8am-4pm', 'student', '10.00');
-DELETE FROM `employee` WHERE  card_id=21;
-
-select *
-from employee;
 
 -- Recursive Queries (25 marks) 
 With Recursive employee_hierarchy (card_id, supervisor_card_id,chain_length) As (
@@ -98,9 +79,6 @@ Select Distinct chain_length
 From employee_hierarchy
 Where chain_length = (Select Max(chain_length) from employee_hierarchy);
 
-Select * 
-From employee;
-
 -- Rank Query (15 marks)
 With employee_salary_rank As(
 	select person.card_id, person.name, person.dob, employee.salary_hour, Rank() Over(Order by salary_hour Desc) salary_rank
@@ -115,8 +93,6 @@ highest_paid_employee As(
 select * 
 from highest_paid_employee 
 where highest_paid_employee.dob_rank=2
-
-
 
 
     
