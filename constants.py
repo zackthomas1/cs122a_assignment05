@@ -1,8 +1,8 @@
 class Constants:
     
-    USER = "your_db_username"
+    USER = "znt23"
     
-    PASSWORD = "your_db_password"
+    PASSWORD = "Y44SHJd7e1MA"
     
     DATABASE = "cs122a"
     
